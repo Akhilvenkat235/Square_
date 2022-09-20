@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 /** Creates the Squash stacktrace format for serialization by gson. */
+
+//hi
 public final class SquashBacktrace {
 
   private SquashBacktrace() {
