@@ -38,6 +38,7 @@ public final class SquashBacktrace {
     final SquashException currentThread =
         new SquashException(Thread.currentThread().getName(), true, getStacktraceArray(error));
     threadList.add(currentThread);
+    System.out.println("the current thread"+currentThread);
     return threadList;
   }
 
@@ -66,6 +67,7 @@ public final class SquashBacktrace {
             field.setAccessible(true);
           }
           Object val = field.get(error);
+          System.out.println("the error is"+error);
           ivars.put(field.getName(), val);
         }
       } catch (IllegalAccessException e) {
