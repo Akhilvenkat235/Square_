@@ -26,7 +26,9 @@ import java.util.Map;
 //hi
 public final class SquashBacktrace {
 
-  private SquashBacktrace() {
+  private SquashBacktrace(Exception e) {
+    e.printStackTrace();
+
     // Should not be instantiated: this is a utility class.
   }
 
