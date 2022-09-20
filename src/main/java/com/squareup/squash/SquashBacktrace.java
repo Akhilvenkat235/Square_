@@ -65,9 +65,7 @@ public final class SquashBacktrace {
       try {
         if (!Modifier.isStatic(field.getModifiers()) // Ignore static fields.
             && !field.getName().startsWith("CGLIB")) { // Ignore mockito stuff in tests.
-          if (!field.isAccessible()) {
-            field.setAccessible(true);
-          }
+          
           Object val = field.get(error);
           System.out.println("the error is"+error);
           ivars.put(field.getName(), val);
