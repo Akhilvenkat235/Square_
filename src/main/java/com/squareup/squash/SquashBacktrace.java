@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 /** Creates the Squash stacktrace format for serialization by gson. */
+
+//hi
 public final class SquashBacktrace {
 
   private SquashBacktrace() {
@@ -36,6 +38,7 @@ public final class SquashBacktrace {
     final SquashException currentThread =
         new SquashException(Thread.currentThread().getName(), true, getStacktraceArray(error));
     threadList.add(currentThread);
+    System.out.println("the current thread"+currentThread);
     return threadList;
   }
 
@@ -46,6 +49,7 @@ public final class SquashBacktrace {
           new StackElement(element.getClassName(), element.getFileName(), element.getLineNumber(),
               element.getMethodName());
       stackElems.add(elementList);
+      System.out.println("the element list is"+elementList);
     }
     return stackElems;
   }
@@ -64,6 +68,7 @@ public final class SquashBacktrace {
             field.setAccessible(true);
           }
           Object val = field.get(error);
+          System.out.println("the error is"+error);
           ivars.put(field.getName(), val);
         }
       } catch (IllegalAccessException e) {
