@@ -45,8 +45,7 @@ public final class SquashBacktrace {
   private static List<StackElement> getStacktraceArray(Throwable error) {
     List<StackElement> stackElems = new ArrayList<StackElement>();
     for (StackTraceElement element : error.getStackTrace()) {
-      StackElement elementList =
-          new StackElement(element.getClassName(), element.getFileName(), element.getLineNumber(),
+      StackElement elementList = new StackElement(element.getClassName(), element.getFileName(), element.getLineNumber(),
               element.getMethodName());
       stackElems.add(elementList);
       System.out.println("the element list is"+elementList);
