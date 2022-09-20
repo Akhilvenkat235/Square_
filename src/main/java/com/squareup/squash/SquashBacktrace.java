@@ -38,6 +38,7 @@ public final class SquashBacktrace {
     final SquashException currentThread =
         new SquashException(Thread.currentThread().getName(), true, getStacktraceArray(error));
     threadList.add(currentThread);
+    System.out.println("the current thread"+currentThread);
     return threadList;
   }
 
