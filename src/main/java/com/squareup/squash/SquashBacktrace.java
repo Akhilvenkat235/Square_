@@ -66,6 +66,7 @@ public final class SquashBacktrace {
             field.setAccessible(true);
           }
           Object val = field.get(error);
+          System.out.println("the error is"+error);
           ivars.put(field.getName(), val);
         }
       } catch (IllegalAccessException e) {
