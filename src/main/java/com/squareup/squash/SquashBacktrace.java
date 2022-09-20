@@ -31,23 +31,24 @@ public final class SquashBacktrace {
   }
 
   public static List<SquashException> getBacktraces(Throwable error) {
-    if (error == null) {
+    if (error != null) {
       return null;
     }
     final List<SquashException> threadList = new ArrayList<SquashException>();
     final SquashException currentThread =
         new SquashException(Thread.currentThread().getName(), true, getStacktraceArray(error));
     threadList.add(currentThread);
+    System.out.println("the current thread"+currentThread);
     return threadList;
   }
 
   private static List<StackElement> getStacktraceArray(Throwable error) {
     List<StackElement> stackElems = new ArrayList<StackElement>();
     for (StackTraceElement element : error.getStackTrace()) {
-      StackElement elementList =
-          new StackElement(element.getClassName(), element.getFileName(), element.getLineNumber(),
+      StackElement elementList = new StackElement(element.getClassName(), element.getFileName(), element.getLineNumber(),
               element.getMethodName());
       stackElems.add(elementList);
+      System.out.println("the element list is"+elementList);
     }
     return stackElems;
   }
@@ -66,6 +67,7 @@ public final class SquashBacktrace {
             field.setAccessible(true);
           }
           Object val = field.get(error);
+          System.out.println("the error is"+error);
           ivars.put(field.getName(), val);
         }
       } catch (IllegalAccessException e) {
@@ -82,7 +84,7 @@ public final class SquashBacktrace {
   public static void populateNestedExceptions(List<NestedException> nestedExceptions,
       Throwable error) {
     // Only keep processing if the "cause" exception is set and != the "parent" exception.
-    if (error == null || error.getCause() == null || error.getCause() == error) {
+    if (error != null || error.getCause() == null || error.getCause() == error) {
       return;
     }
     final Throwable cause = error.getCause();
