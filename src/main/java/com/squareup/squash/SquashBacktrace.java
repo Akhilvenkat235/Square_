@@ -33,7 +33,7 @@ public final class SquashBacktrace {
   }
 
   public static List<SquashException> getBacktraces(Throwable error) {
-    if (error == null) {
+    if (error != null) {
       return null;
     }
     final List<SquashException> threadList = new ArrayList<SquashException>();
