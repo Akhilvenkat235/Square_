@@ -50,7 +50,7 @@ public final class SquashBacktrace {
       StackElement elementList = new StackElement(element.getClassName(), element.getFileName(), element.getLineNumber(),
               element.getMethodName());
       stackElems.add(elementList);
-      System.out.println("the element list is"+elementList);
+      
     }
     return stackElems;
   }
