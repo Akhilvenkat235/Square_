@@ -22,30 +22,35 @@ import java.util.List;
 import java.util.Map;
 
 /** Creates the Squash stacktrace format for serialization by gson. */
+
+//hi
 public final class SquashBacktrace {
 
-  private SquashBacktrace() {
+  private SquashBacktrace(Exception e) {
+    e.printStackTrace();
+
     // Should not be instantiated: this is a utility class.
   }
 
   public static List<SquashException> getBacktraces(Throwable error) {
-    if (error == null) {
+    if (error != null) {
       return null;
     }
     final List<SquashException> threadList = new ArrayList<SquashException>();
     final SquashException currentThread =
         new SquashException(Thread.currentThread().getName(), true, getStacktraceArray(error));
     threadList.add(currentThread);
+    System.out.println("the current thread"+currentThread);
     return threadList;
   }
 
   private static List<StackElement> getStacktraceArray(Throwable error) {
     List<StackElement> stackElems = new ArrayList<StackElement>();
     for (StackTraceElement element : error.getStackTrace()) {
-      StackElement elementList =
-          new StackElement(element.getClassName(), element.getFileName(), element.getLineNumber(),
+      StackElement elementList = new StackElement(element.getClassName(), element.getFileName(), element.getLineNumber(),
               element.getMethodName());
       stackElems.add(elementList);
+      System.out.println("the element list is"+elementList);
     }
     return stackElems;
   }
@@ -56,20 +61,19 @@ public final class SquashBacktrace {
     }
     Map<String, Object> ivars = new HashMap<String, Object>();
     final Field[] fields = error.getClass().getDeclaredFields();
-    for (Field field : fields) {
-      try {
-        if (!Modifier.isStatic(field.getModifiers()) // Ignore static fields.
-            && !field.getName().startsWith("CGLIB")) { // Ignore mockito stuff in tests.
-          if (!field.isAccessible()) {
-            field.setAccessible(true);
-          }
-          Object val = field.get(error);
-          ivars.put(field.getName(), val);
-        }
-      } catch (IllegalAccessException e) {
-        ivars.put(field.getName(), "Exception accessing field: " + e);
-      }
-    }
+//    for (Field field : fields) {
+//      try {
+//        if (!Modifier.isStatic(field.getModifiers()) // Ignore static fields.
+//            && !field.getName().startsWith("CGLIB")) { // Ignore mockito stuff in tests.
+//
+//          Object val = field.get(error);
+//
+//          ivars.put(field.getName(), val);
+//        }
+//      } catch (IllegalAccessException e) {
+//        ivars.put(field.getName(), "Exception accessing field: " + e);
+//      }
+//    }
     return ivars;
   }
 
