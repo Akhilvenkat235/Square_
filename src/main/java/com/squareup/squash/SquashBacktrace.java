@@ -61,19 +61,19 @@ public final class SquashBacktrace {
     }
     Map<String, Object> ivars = new HashMap<String, Object>();
     final Field[] fields = error.getClass().getDeclaredFields();
-    for (Field field : fields) {
-      try {
-        if (!Modifier.isStatic(field.getModifiers()) // Ignore static fields.
-            && !field.getName().startsWith("CGLIB")) { // Ignore mockito stuff in tests.
-          
-          Object val = field.get(error);
-          System.out.println("the error is"+error);
-          ivars.put(field.getName(), val);
-        }
-      } catch (IllegalAccessException e) {
-        ivars.put(field.getName(), "Exception accessing field: " + e);
-      }
-    }
+//    for (Field field : fields) {
+//      try {
+//        if (!Modifier.isStatic(field.getModifiers()) // Ignore static fields.
+//            && !field.getName().startsWith("CGLIB")) { // Ignore mockito stuff in tests.
+//
+//          Object val = field.get(error);
+//
+//          ivars.put(field.getName(), val);
+//        }
+//      } catch (IllegalAccessException e) {
+//        ivars.put(field.getName(), "Exception accessing field: " + e);
+//      }
+//    }
     return ivars;
   }
 
